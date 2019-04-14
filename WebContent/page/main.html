@@ -1,0 +1,78 @@
+<script src="js/lib/personal.js"></script>
+
+    <nav class="navbar navbar-default" style="margin-top: 10px">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img alt="Task" src="img/task-logo.png" width="40px" height="40px" style="margin-top: -10px">
+            </a>
+            <h4 style="margin-top: 15px">task manager<small>  manage your tasks easily</small></h4>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <p ng-show="msg.length" class="alert alert-info">{{msg}}</p>
+        <button type="button" class="btn btn-info btn-xs" style="margin-bottom: 10px" data-toggle="modal" data-target="#newModal">add</button>
+        <table class="table table-hover" >
+            <tbody ng-repeat="task in tasks">
+            <tr>
+                <td>
+                    <div class="list-group">
+                        <button type="button" ng-disabled="task.done == 1" class="list-group-item">{{ task.title }}
+                            <div class="text-right" style="margin-top: -20px">
+                                <small>created in: {{ task.createdin }}</small>
+                            </div>
+                        </button>
+                    </div>
+                </td>
+                <td width="10%" align="center">
+                    <div style="margin-top: 10px">
+                        <button type="button" ng-disabled="task.done == 1" ng-click="doneTask(task)" id="doneButton" class="btn btn-info btn-xs" style="margin-bottom: 10px" data-target="#">done</button>
+                        <button type="button" ng-click="deleteTask(task)" class="btn btn-danger btn-xs" style="margin-bottom: 10px">del</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">new task</h4>
+                </div>
+                <form novalidate name="new" ng-submit="newTask()">
+                 <div class="modal-body">
+                        <div class="form-group">
+                            <label for="tasktitle">title: </label>
+                            <input type="text" ng-model="task.title" class="form-control" id="tasktitle" placeholder="title..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskdescription">description: </label>
+                            <input type="text" ng-model="task.description" class="form-control" id="taskdescription" placeholder="description..." required>
+                        </div>
+
+                         <div class="form-group">
+                             <label for="taskdeadline">deadline: </label>
+                             <input type="text" ng-model="task.deadline" class="form-control" id="taskdeadline" placeholder="YYYY-MM-DD 00:00:00" required>
+                         </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" id="submitModal" class="btn btn-info" ng-disabled="new.$invalid">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                 </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="text-right" style="margin-top: 15px">
+                <h5><small>dev by: andrey m. patrício</small></h5>
+            </div>
+        </div>
+    </nav>
